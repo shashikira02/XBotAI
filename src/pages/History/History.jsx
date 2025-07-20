@@ -42,9 +42,11 @@ export default function History() {
       <Navbar />
 
       <Box p={{ xs: 2, md: 3 }}>
-        <Typography variant="h2" textAlign={"center"} mb={3}>
-          Conversation History
-        </Typography>
+        <div>
+          <Typography variant="h1" fontSize={{ xs: 20, md: 28 }} fontWeight={700}>
+            Past Conversations
+          </Typography>
+        </div>
 
         {chats.length > 0 && (
           <ChatFilter allChats={chats} filterChats={setFilteredChats} />

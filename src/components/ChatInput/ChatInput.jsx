@@ -21,7 +21,7 @@ export default function ChatInput({
   const inputRef = useRef(null);
   const [showSnackbar, setShowSnackbar] = useState(false);
 
-  const { saveChatHistory } = useChatHistory();
+  // const { saveChatHistory } = useChatHistory();
 
   const handleInputChange = useCallback((e) => {
     setInput(e.target.value);
@@ -37,7 +37,12 @@ export default function ChatInput({
   }, [input, generateResponse, setScroll]);
 
   const handleSave = () => {
-    saveChatHistory(chat);
+    const chat_history = JSON.parse(localStorage.getItem("chat")) || [];
+    const date = new Date();
+    localStorage.setItem(
+      "chat",
+      JSON.stringify([{ chat: chat, datetime: date }, ...chat_history])
+    );
     clearChat();
     setShowSnackbar(true);
   };
@@ -55,7 +60,7 @@ export default function ChatInput({
       <Box component={"form"} onSubmit={handleSubmit}>
         <Stack direction={"row"} spacing={{ xs: 0.5, md: 2 }}>
           <TextField
-            placeholder={CHAT_CONFIG.PLACEHOLDER_TEXT}
+            placeholder="Message Bot AI..." 
             sx={{
               flex: 1,
               bgcolor: "primary.light",
